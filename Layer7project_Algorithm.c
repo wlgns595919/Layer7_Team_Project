@@ -17,8 +17,8 @@
 #define BINP2 80 // 부쉬에 있는 상태의 플레이어 2
 #define PLAYER2 90 // 평상시 플레이어 2
 #define COL GetStdHandle(STD_OUTPUT_HANDLE) // 글자 색 지정
-#define SHOOTSPEED 6 // 평상시 쐈을때 총알속도
-#define BUSHSHOOTSPEED 4 // 부쉬에서 쐈을때 총알속도
+#define SHOOTSPEED 5 // 평상시 쐈을때 총알속도
+#define BUSHSHOOTSPEED 3 // 부쉬에서 쐈을때 총알속도
 #define UP1 'w' // 플레이어 1 방향키
 #define DOWN1 's' 
 #define LEFT1 'a'
@@ -529,6 +529,7 @@ void win_lose() {
 		printf("┗━━━━━━━━━━━━━━━━━━━━━━━┛");
 		gotoxy(47, 19);
 		printf("P2 Winner!!        "); // p2 승리 출력
+		Sleep(3000);
 		exit(0);
 	}
 	else if (p2 == 0) {
@@ -542,6 +543,7 @@ void win_lose() {
 		printf("┗━━━━━━━━━━━━━━━━━━━━━━━┛");
 		gotoxy(47, 19);
 		printf("P1 Winner!!        "); // p1 승리 출력
+		Sleep(3000);
 		exit(0);
 	}
 }
@@ -911,8 +913,6 @@ void bulletload(double dissave1, double dissave2) {
 void itemrespawn(int repeat) {
 	float gunet, ginpet, ginpet2, etpt; // clock 함수 쓰기위한 변수들
 
-	print_infor(); // 플레이어 정보를 출력
-
 	if (repeat == 1) { // 반복이 있는 아이템생성
 		while (1) {
 			gunet = clock() - gunst; // 총이 일정시간마다 나오도록 변수 선언할때 clock 해주었고 지금 clock 한 값에 처음 clock 한 것을 빼준것을 저장한다
@@ -980,6 +980,7 @@ void map_reset() {
 		map[39][i] = 1;
 		map[i][39] = 1;
 	}
+
 	gameplay();
 }
 
@@ -990,6 +991,8 @@ void gameplay() {
 	player();
 	player2();
 	printmap(); // 위 함수로 맵의 값이 변경되고 마지막에 맵을 출력
+
+	print_infor(); // 플레이어 정보를 출력
 
 	for (i = 0; i < MAPSIZE; i++)
 	{
